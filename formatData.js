@@ -17,6 +17,13 @@ const formatData = (data) => {
     formattedDataArrays.push(chunk);
   }
 
+  // ensure hh:mm:ss format instead of potentially hh:mm:s
+  formattedDataArrays.forEach((element) => {
+    if (element[2].length === 2) {
+      element[2] = `0${element[2]}`;
+    }
+  });
+
   renderTables(formattedDataArrays);
 };
 

@@ -37,6 +37,7 @@ function renderRow(tableBody, element, station) {
 
   td1.textContent = element[0];
   td2.textContent = `${element[3]}:${element[2].slice(0, -1)}`;
+  // removes the trailing s character
   td3.textContent = "";
   td4.textContent = "";
   td5.textContent = station;
