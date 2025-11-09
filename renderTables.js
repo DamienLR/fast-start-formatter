@@ -2,6 +2,13 @@ const tableBody = document.querySelectorAll(".tableBody");
 const [tableBodyP2, tableBodyP3, tableBodyP4] = document.querySelectorAll(
   ".tableBodyP2, .tableBodyP3, .tableBodyP4"
 );
+const messageForSlack = document.querySelector(".messageForSlack");
+// for pasting into slack to let other leads know if they
+// have any misses to STU without opening the flow quip
+
+let missCountP2 = 0;
+let missCountP3 = 0;
+let missCountP4 = 0;
 
 const renderTables = (data) => {
   tableBody.forEach((tbody) => {
@@ -15,16 +22,22 @@ const renderTables = (data) => {
       const station = parseInt(element[5].replace("dz-p-a", ""));
 
       if (station < 3000) {
+        missCountP2 += 1;
         renderRow(tableBodyP2, element, station);
       }
       if (station > 3000 && station < 4000) {
+        missCountP3 += 1;
         renderRow(tableBodyP3, element, station);
       }
       if (station > 4000) {
+        missCountP4 += 1;
         renderRow(tableBodyP4, element, station);
       }
     }
   });
+
+  messageForSlack.textContent = `FS updated. 
+  P2 misses: ${missCountP2} | P3 misses: ${missCountP3} | P4 misses: ${missCountP4}`;
 };
 
 function renderRow(tableBody, element, station) {
