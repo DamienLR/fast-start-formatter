@@ -5,6 +5,7 @@ const formInput = document.querySelector(".formInput");
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
+  console.log(formInput.value);
   formatData(formInput.value);
   formInput.value = "";
 });
